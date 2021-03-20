@@ -19,7 +19,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Punk API</h1>
+        <h3> for </h3>
+        <h2>BrewDog Punk IPAs</h2>
       </header>
       <main>
         <Search setBeersList={setBeersList}/>
