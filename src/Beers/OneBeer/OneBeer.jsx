@@ -2,12 +2,14 @@ import React from 'react';
 import styles from './OneBeer.module.scss';
 
 const OneBeer = (props) => {
+  const beer = props.beer;
   return (
     <div className={styles.main}>
+      {beer.name} <br/>
+      {beer.tagline} <br/>
+      Strength: {beer.abv} <br/>
+      Description: {beer.description} <br/>
 
-      <h4>I'm one beer on my own</h4>
-      {console.log(props.oneBeer.name)}
-      {/* Beer name: {props.oneBeer} */}
     </div>
   )
 }
