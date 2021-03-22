@@ -9,6 +9,7 @@ const OneBeer = (props) => {
       {beer.tagline} <br/>
       Strength: {beer.abv} <br/>
       Description: {beer.description} <br/>
+      ph: {beer.ph} <br/>
 
     </div>
   )

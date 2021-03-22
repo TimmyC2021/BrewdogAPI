@@ -5,12 +5,11 @@ import OneBeer from './OneBeer';
 const Beers = (props) => {
   const beersList = props.beersList;
 
-  console.log(beersList.length);
+  console.log(`Count beers: ${beersList.length}`);
   
   const listBeers = beersList.map((beer) => {
-    // console.log('Inside List Beers');
-    console.log(`  ${beer.name}`);
-    return <OneBeer beer={beer} />
+    // console.log(`  ${beer.name}`);
+    return <OneBeer key={beer.id} beer={beer} />
     // <li>{beer.name}</li>
    } );
 
@@ -23,8 +22,10 @@ const Beers = (props) => {
           {listBeers}
         </ul>
         // <OneBeer oneBeer={props.beersList[0]}/> 
-        : <p>Sorry, there are no beers that match your criteria <br />
+        : <><p>Sorry, there are no beers that match your criteria <br />
         Please try searching again</p>
+        <img className={styles.emptyGlass} src="beerGlass.gif" alt="Empty Beer Glass"/>
+        </>
       }
 
     </div>

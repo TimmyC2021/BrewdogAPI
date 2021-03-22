@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
+import styles from './App.css';
 import Search from './Search';
 import Beers from './Beers';
 import { useState } from 'react';
@@ -23,7 +22,7 @@ function App() {
         <h3> for </h3>
         <h2>BrewDog Punk IPAs</h2>
       </header>
-      <main>
+      <main className={styles.flexBoxContainer}>
         <Search setBeersList={setBeersList}/>
         <Beers beersList={beersList}/>
       </main>
