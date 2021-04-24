@@ -15,11 +15,11 @@ const Search = (props) => {
       const apiResponse = await fetch(`https://api.punkapi.com/v2/beers${searchCriteria}`);
       const jsonResponse = await apiResponse.json();
       acidicLow ? acidResponse = jsonResponse.filter((beer)=> beer.ph < 4) : acidResponse = jsonResponse;
-      food != '' 
-        ? foodResponse = acidResponse.filter((beer)=> beer.food_pairing.indexOf(food)>=0) 
+      food !== '' 
+        ? foodResponse = acidResponse.filter((beer)=> beer.food_pairing.filter((foodItem)=> foodItem.indexOf(food)>=0))  
         : foodResponse = acidResponse
         ;
-
+      
         console.log(`foodResponse: ${foodResponse}`);
       return props.setBeersList(foodResponse)    
     }
@@ -71,7 +71,9 @@ const searchHighABV = (isChecked) => {
   return isChecked ? `abv_gt=6`: '';
 }
 
-
+const maxBeersPage = (numberPerPage) => {
+  return numberPerPage > 0 ? `per_page=${numberPerPage}` : '';
+}
 
   // This is the function runs when Search is pressed
   const onClickHandler = (event) => {
@@ -79,6 +81,7 @@ const searchHighABV = (isChecked) => {
     const checkBoxHighABV = document.getElementById('HighABV')
     const acidicLow = document.getElementById('LowPH')
     const foodInputBox = document.getElementById('foodInput');
+    const maxBeers = document.getElementById('maxBeers');
     
     
   
@@ -87,6 +90,7 @@ const searchHighABV = (isChecked) => {
     // Construct search string for criteria to pass to API
     searchText = combineSearchCriteria(searchText,searchName(inputBox.value));
     searchText = combineSearchCriteria(searchText,searchHighABV(checkBoxHighABV.checked));
+    searchText = combineSearchCriteria(searchText,maxBeersPage(maxBeers.value));
 
     // Construct search filters to process after API
     searchFilterList = acidicLow.checked ? (searchFilterList => [...searchFilterList,`(beer)=> beer.ph < 4.4`]) : searchFilterList;
@@ -94,7 +98,7 @@ const searchHighABV = (isChecked) => {
     
     console.log(`After searchName and checkBoxHighABV ${searchText}`);
 
-    searchBeers(searchText, acidicLow.checked, foodInputBox.value);
+    searchBeers(searchText, acidicLow.checked, foodInputBox.value, maxBeers.value);
     // const apiBeersList = searchBeers(searchText, searchFilterList);
     // console.log(apiBeersList);
     // props.setBeersList(searchBeers());
@@ -132,6 +136,14 @@ const searchHighABV = (isChecked) => {
       <br/>
       <br/>
       <button onClick={onClickHandler}>Search</button>
+      <br/><br/><br/><br/><br/>
+      <label htmlFor="maxBeers">Results per page </label>
+      <input id='maxBeers' type="text" placeholder='Default 25 max 80'/>
+      <br/>
+      <label htmlFor="pageNumber">Page </label>
+      <input id='pageNumber' type="number" placeholder='1'/>
+
+
       
     </div>
   )

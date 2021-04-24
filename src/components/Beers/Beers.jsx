@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Beers.module.scss';
 import OneBeer from './OneBeer';
+import CardList from '../CardList';
 
 const Beers = (props) => {
   const beersList = props.beersList;
@@ -17,10 +18,16 @@ const Beers = (props) => {
     <div className={styles.main}>
       <h3>Which beer would you like to try?</h3>
 
+      
       {beersList.length > 0 
-        ? <ul>
+        ? <>
+        <h3>Count beers: {beersList.length}</h3>
+        <CardList beersList={beersList}/>
+
+        <ul>
           {listBeers}
         </ul>
+        </>
         // <OneBeer oneBeer={props.beersList[0]}/> 
         : <><p>Sorry, there are no beers that match your criteria <br />
         Please try searching again</p>

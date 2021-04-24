@@ -1,6 +1,6 @@
 import styles from './App.css';
-import Search from './Search';
-import Beers from './Beers';
+import Search from './components/Search';
+import Beers from './components/Beers';
 import { useState } from 'react';
 
 function App() {
